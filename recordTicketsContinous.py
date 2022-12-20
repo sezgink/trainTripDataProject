@@ -40,6 +40,7 @@ dbConnection = mysql.connector.connect(
 )
 
 cursor= dbConnection.cursor()
+addQuery = "INSERT INTO trips (trip_date, data_date, trip_direction, empty_economy, empty_business) VALUES (%s, %s, %s, %s,%s)"
 
 class TrainTrip:
     hour = ""
@@ -54,6 +55,9 @@ class TrainTrip:
          query = "INSERT INTO trips (trip_date, data_date, trip_direction, empty_economy, empty_business) VALUES (%s, %s, %s, %s,%s)"
          values = (self.tripDate,self.fetchDate,self.tripDirection,self.economyCount,self.businessCount)
          cursor.execute(query,values)
+    def GetValuesTupple(self):
+        return (self.tripDate,self.fetchDate,self.tripDirection,self.economyCount,self.businessCount)
+
 def ConvertToIntHour(stringHour):
     jHour = stringHour.replace(":", "")
     return int(jHour)
@@ -205,10 +209,14 @@ def PrintTrips():
         print("Trip Direciton"+str(t.tripDirection))
 
 def RecordTrips():
+    valueTupples = []
     for t in trainTrips:
-        t.Add2Table(cursor)
+        valueTupples.append(t.GetValuesTupple())
+        # t.Add2Table(cursor)
+    if(len(valueTupples)<1):
+        return
+    cursor.executemany(addQuery, valueTupples)
     
-
 def SetCurrentDirection(directionIndex : int):
     global currentStartLocation
     global currentTerminationLocation
