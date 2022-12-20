@@ -50,7 +50,7 @@ class TrainTrip:
     tripDirection = ""
 
     def Add2Table(self,cursor):
-         query = "INSERT INTO trips (trip_date, data_date, trip_direction, empty_economy, empty_business) VALUES ({0}, {1}, {2}, {3},{4})".format(self.tripDate,self.fetchDate,self.tripDirection,self.economyCount,self.businessCount)
+         query = "INSERT INTO trips (trip_date, data_date, trip_direction, empty_economy, empty_business) VALUES ({0}, {1}, {2}, {3},{4});".format(self.tripDate,self.fetchDate,self.tripDirection,self.economyCount,self.businessCount)
          cursor.execute(query)
 def ConvertToIntHour(stringHour):
     jHour = stringHour.replace(":", "")
