@@ -194,7 +194,7 @@ def PostResults(day : date, queryTime : datetime):
 searching = True
 
 def PrintTrips():
-    for h in trainTrips:
+    for t in trainTrips:
         # print(h.hour)
         print("Trip Date"+str(t.tripDate))
         print("Economy count "+str(t.economyCount))
