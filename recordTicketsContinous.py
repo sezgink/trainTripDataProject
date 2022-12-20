@@ -227,7 +227,7 @@ def AddDirection(directionIndex):
 while(searching):
     today = date.today()
     activeDay=today
-    currentTime = datetime.now()
+    currentTime = datetime.now().replace(microsecond=0)
     print(currentTime)
     for dateIndex in range(30):
         for directionIndex in range(2):
