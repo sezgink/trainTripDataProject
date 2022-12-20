@@ -248,7 +248,7 @@ while(searching):
             ClickForResults(activeDay)
             PostResults(activeDay,currentTime)
             AddDirection(directionIndex)
-            PrintTrips()
+            # PrintTrips()
             RecordTrips()
             time.sleep(1)
 
