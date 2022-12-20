@@ -232,8 +232,7 @@ while(searching):
             AddDirection(directionIndex)
             # PrintTrips()
             RecordTrips()
-            # time.sleep(3+random.randint(-2, 2))
             time.sleep(1)
 
-    # time.sleep(1800) 
-    time.sleep(1) 
+    time.sleep(1800) #Scrape each 30 minutes
+    # time.sleep(1) 
