@@ -11,6 +11,7 @@ from datetime import date, datetime, timedelta
 import sys
 from dotenv import load_dotenv
 import os
+import mysql.connector
 
 load_dotenv()
 chrome_driver_adress = os.environ.get("chromedadress")
@@ -31,14 +32,26 @@ options.add_argument('--headless')
 
 driver = webdriver.Chrome(chrome_driver_adress,chrome_options=options)
 
+dbConnection = mysql.connector.connect(
+  host=os.environ.get("sqlhost"),
+  user=os.environ.get("sqluser"),
+  password=os.environ.get("sqlpass"),
+  database="train_data"
+)
+
+cursor= dbConnection.cursor()
+
 class TrainTrip:
     hour = ""
     economyCount = 0
     businessCount = 0
     tripDate : datetime = None
     fetchDate : datetime = None
-    tripDirection = "" 
+    tripDirection = ""
 
+    def Add2Table(self,cursor):
+         query = "INSERT INTO trips (trip_date, data_date, trip_direction, empty_economy, empty_business) VALUES ({0}, {1}, {2}, {3},{4})".format(self.tripDate,self.fetchDate,self.tripDirection,self.economyCount,self.businessCount)
+         cursor.execute(query)
 def ConvertToIntHour(stringHour):
     jHour = stringHour.replace(":", "")
     return int(jHour)
@@ -181,22 +194,17 @@ def PostResults(day : date, queryTime : datetime):
 searching = True
 
 def PrintTrips():
-    if len(trainTrips)>0:
-        print("Trains available!")
     for h in trainTrips:
-        # print(h.hour)
-        print(h.tripDate)
-        print("Economy count "+str(h.economyCount))
-        print("Business count "+str(h.businessCount))
-
-def RecordTrips():
-    for t in trainTrips:
         # print(h.hour)
         print("Trip Date"+str(t.tripDate))
         print("Economy count "+str(t.economyCount))
         print("Business count "+str(t.businessCount))
         print("Fetch Date"+str(t.tripDate))
         print("Trip Direciton"+str(t.tripDirection))
+
+def RecordTrips():
+    for t in trainTrips:
+        t.Add2Table(cursor)
     
 
 def SetCurrentDirection(directionIndex : int):
@@ -230,7 +238,7 @@ while(searching):
             ClickForResults(activeDay)
             PostResults(activeDay,currentTime)
             AddDirection(directionIndex)
-            # PrintTrips()
+            PrintTrips()
             RecordTrips()
             time.sleep(1)
 
