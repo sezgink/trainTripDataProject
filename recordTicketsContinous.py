@@ -8,6 +8,12 @@ import random
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from datetime import date, datetime, timedelta
+import sys
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+chrome_driver_adress = os.environ.get("chromedadress")
 
 tryCounter = 0
 
@@ -22,7 +28,7 @@ options = webdriver.ChromeOptions()
 options.add_argument('--ignore-certificate-errors')
 options.add_argument('--ignore-ssl-errors')
 
-driver = webdriver.Chrome('C:/Users/Sertan/Downloads/chromedriver_win32/chromedriver',chrome_options=options)
+driver = webdriver.Chrome(chrome_driver_adress,chrome_options=options)
 
 class TrainTrip:
     hour = ""
@@ -44,7 +50,6 @@ hourEndInt = ConvertToIntHour(hourEnd)
 trainTrips = []
 
 lastDate = date.today()
-
 
 def ClickForResults(date2check : date):
     global tryCounter
