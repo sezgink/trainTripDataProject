@@ -215,7 +215,10 @@ def RecordTrips():
         # t.Add2Table(cursor)
     if(len(valueTupples)<1):
         return
-    cursor.executemany(addQuery, valueTupples)
+    try:
+        cursor.executemany(addQuery, valueTupples)
+    except:
+        print("Error while adding values to db")
     
 def SetCurrentDirection(directionIndex : int):
     global currentStartLocation
@@ -230,7 +233,6 @@ def SetCurrentDirection(directionIndex : int):
 directionList = ["Esk-Ist","Ist-Esk"]
 
 def AddDirection(directionIndex):
-
      for t in trainTrips:
         t.tripDirection = directionList[directionIndex]
 
