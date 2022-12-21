@@ -217,6 +217,7 @@ def RecordTrips():
         return
     try:
         cursor.executemany(addQuery, valueTupples)
+        dbConnection.commit()
     except:
         print("Error while adding values to db")
     
