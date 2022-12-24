@@ -1,7 +1,7 @@
 # Train Trip Data Project
 
 ## Aim
-Create data for observing available train tickets over one month to catch their sale patterns. Finding best intervals to buy tickets.
+Creating data for observing available train tickets over one month to catch their sale patterns. Finding best intervals to buy tickets.
 
 ## Method
 Scraping train ticket website by using Selenium framework on python.
