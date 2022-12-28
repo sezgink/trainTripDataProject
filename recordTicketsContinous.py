@@ -11,8 +11,7 @@ from datetime import date, datetime, timedelta
 import sys
 from dotenv import load_dotenv
 import os
-import dbFunctions
-
+import mysql.connector
 
 load_dotenv()
 chrome_driver_adress = os.environ.get("chromedadress")
@@ -39,8 +38,14 @@ options.add_argument('--disable-gpu')
 
 driver = webdriver.Chrome(chrome_driver_adress,chrome_options=options)
 
-dbConnection,cursor = dbFunctions.GetConnection()
+dbConnection = mysql.connector.connect(
+  host=os.environ.get("sqlhost"),
+  user=os.environ.get("sqluser"),
+  password=os.environ.get("sqlpass"),
+  database="train_data"
+)
 
+cursor= dbConnection.cursor()
 addQuery = "INSERT INTO trips (trip_date, data_date, trip_direction, empty_economy, empty_business) VALUES (%s, %s, %s, %s,%s)"
 
 class TrainTrip:
@@ -78,20 +83,7 @@ def ClickForResults(date2check : date):
     if(tryCounter>2):
         return 
     
-    try:
-        driver.get('https://ebilet.tcddtasimacilik.gov.tr/view/eybis/tnmGenel/tcddWebContent.jsf')
-    except TimoutException:
-        print("Timeout Exception")
-        time.sleep(1)
-        ClickForResults(date2check)
-        tryCounter += 1
-        return
-    except:
-        print("Couldnt get adress")
-        time.sleep(1)
-        ClickForResults(date2check)
-        tryCounter += 1
-        return
+    driver.get('https://ebilet.tcddtasimacilik.gov.tr/view/eybis/tnmGenel/tcddWebContent.jsf')
 
     lastDate = date2check
     targetDate = date2check.strftime("%d.%m.%Y")
