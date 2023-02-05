@@ -26,6 +26,6 @@ def GetTripsBetweenDataDates(dataDateFrom,dataDateTo):
     tripsBetween = cursor.fetchall()
     return tripsBetween
 
-_trips = GetTripsBetweenDataDates("2023-01-11 19:10:00","2023-01-15 19:10:00")
+_trips = GetTripsBetweenDataDates("2023-01-11 19:10:00","2023-01-12 19:10:00")
 print(_trips)
     # addQuery = "INSERT INTO trips (trip_date, data_date, trip_direction, empty_economy, empty_business) VALUES (%s, %s, %s, %s,%s)"
