@@ -14,7 +14,7 @@ Holding data in MySQL data warehouse.
 
 ## Some Insights From Collected Data
 
-Relying on data visualizations of below,
+Relying on data visualizations below:
 - Saturday is the most demanding day and tickets are consumpted 7 days before the trip date.
 - A serious amount of ticket returns happening on the day before the trip. 
 - When there is a low demand to cancelled trip, returns create significant increment in empty seats.
