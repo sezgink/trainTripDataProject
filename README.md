@@ -14,7 +14,11 @@ Holding data in MySQL data warehouse.
 
 ## Simple Review Of Collected Data
 
+Relying on data visualtions of below,
+- Saturday is the most demanding day and tickets are consumpted 7 days before the trip date.
+- A serious amount of ticket returns happening on the day before the trip. 
+- When there is a low demand to cancelled trip, returns create significant increment in empty seats.
+- When there is a high demand to cancelled trip, returns are less and repurchases happen immediately, and there is no a pulse in the high demanding trips.
+
 ![Eskisehir-Istanbul Direction 14.07 trip ticket consumption](./ReadmeMedia/TrainTicketsByDaysEst-Ist14-07.png)
 ![Eskisehir-Istanbul Direction 19.08 trip ticket consumption](./ReadmeMedia/TrainTicketsByDaysEskIst19-08.png)
-![Istanbul-Eskisehir Direction 14.07 trip ticket consumption](./ReadmeMedia/TrainTicketsByDaysIstEsk14-07.png)
-![Istanbul-Eskisehir Direction 19.08 trip ticket consumption](./ReadmeMedia/TrainTicketsByDaysIstEsk19-08.png)
